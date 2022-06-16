@@ -1,0 +1,58 @@
+drop database if exists ejercicio;
+
+create database ejercicio;
+
+use ejercicio;
+
+create table employees(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    brith_date DATE,
+    first_name varchar(14),
+    last_name varchar(16)
+);
+
+
+CREATE TABLE salaries(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    employees_id int,
+    from_date date,
+    to_date date,
+    FOREIGN KEY (employees_id) REFERENCES employees(id)
+);
+
+create table department(
+    id int PRIMARY KEY AUTO_INCREMENT,
+    dept_name varchar(40) 
+);
+
+CREATE TABLE dept_managers(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    employees_id int,
+    dept_id int,
+    from_date DATE,
+    to_date DATE,
+    FOREIGN KEY (employees_id) REFERENCES employees(id)
+);
+
+CREATE TABLE dept_emp(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  	emp_id int(11),
+    dept_id int(4),
+    from_date DATE,
+    to_date DATE,
+    FOREIGN KEY (dept_id) REFERENCES department(id),
+    FOREIGN KEY (emp_id) REFERENCES employees(id)
+);
+
+CREATE TABLE titles( 
+    id int PRIMARY KEY AUTO_INCREMENT,
+    emp_id INT(11),
+    title varchar(50),
+    from_date DATE,
+    to_date DATE,
+    FOREIGN KEY (emp_id) REFERENCES employees(id)
+);
+
+ALTER TABLE dept_managers
+ADD CONSTRAINT FK_dept_managers_id
+FOREIGN KEY (dept_id) REFERENCES department(id);

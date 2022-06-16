@@ -1,0 +1,68 @@
+CREATE DATABASE dailyscrum;
+
+USE dailyscrum;
+
+CREATE TABLE usuarios(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+nombres VARCHAR(50),
+apellidos VARCHAR(50),
+rut VARCHAR(50),
+fechaDeNac DATE,
+edad VARCHAR(50),
+direccion_id INT,
+correo VARCHAR(50),
+constraseña VARCHAR(20),
+rol_id INT
+);
+
+CREATE TABLE tablero(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+grupoTrabajo VARCHAR(50),
+fecha DATE,
+usuario_1 INT,
+usuario_2 INT,
+usuario_3 INT,
+usuario_4 INT,
+usuario_5 INT,
+usuario_6 INT,
+usuario_7 INT,
+usuario_8 INT,
+usuario_9 INT
+);
+
+
+CREATE TABLE mensajeAyer(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+usuario_id INT,
+fecha DATE,
+mensaje VARCHAR(999)
+);
+
+CREATE TABLE mensajHoy(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+usuario_id INT,
+fecha DATE,
+mensaje VARCHAR(999)
+);
+
+CREATE TABLE mensajeDesafíos(
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+usuario_id INT,
+fecha DATE,
+mensaje VARCHAR(999)
+);
+
+alter table mensajeayer
+add constraint fk_ayerusuario
+foreign key (usuario_id)
+references usuarios(id);
+
+alter table mensajehoy
+add constraint fk_hoyusuario
+foreign key (usuario_id)
+references usuarios(id);
+
+alter table mensajedesafíos
+add constraint fk_desafíousuario
+foreign key (usuario_id)
+references usuarios(id);

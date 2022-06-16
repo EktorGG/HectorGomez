@@ -1,0 +1,1 @@
+CREATE DATABASE `Ejemplo` /*!40100 COLLATE 'utf8_spanish_ci' */ <- Primer comando MySql

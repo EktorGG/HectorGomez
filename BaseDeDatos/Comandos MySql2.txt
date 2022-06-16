@@ -1,0 +1,103 @@
+CREATE DATABASE `Ejemplo` /*!40100 COLLATE 'utf8_spanish_ci' */ <- Primer comando MySql
+
+*********************************************************
+
+CREATE USER 'Hector'@'localhost' IDENTIFIED BY "Admin1234";
+
+GRANT ALL PRIVILEGES ON *.* TO 'Hector'@'localhost' WITH GRANT OPTION;
+
+CREATE USER 'Hector'@'%' IDENTIFIED BY 'Admin1234*'; <- puede ser sin *, pero si da error mejor usarlo
+
+GRANT ALL PRIVILEGES ON *.* TO 'pamela'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+exit -> Salir de la terminal
+
+**********************************************************
+
+mysql -u Hector -p <- loguear en la consola
+
+show databases; <- Ver desde la terminal las bases de datos creadas
+
+create database ejemplo; <- Crear una nueva base de datos con el nombre ejemplo
+
+use ejemplo; <- Usar la base de dato creada
+
+show tables; <- Mostras tablas de la base de datos seleccionada
+
+****Estructura de una tabla en la base de datos*****
+
+CREATE TABLE nombre_tabla(
+	nombre_columna tipo_dato,
+	nombre_columna tipo_dato,
+	nombre_columna tipo_dato,
+	nombre_columna tipo_dato,
+	. . .
+	PRIMARY KEY(nombre_columna)
+)
+
+******Creando una tabla******
+
+CREATE TABLE clientes(
+	id int,
+	nombre varchar(30),
+	correo varchar(50),
+	PRIMARY KEY(id)
+)
+
+*Para crear tablas interrelacionadas, debemos crear primero la tabla que no tendrá la llave foranea.
+
+describle clientes; <- Mostrar la estructura de la tabla en la base de datos
+
+select * from nombre_tabla;  <- Consultar la data de la tabla
+
+insert into nombre_tabla (columna1, columna2, columnaN...) values (1, 2, 3, 4, N...); <- Insertar valores a la tabla
+	
+insert into clientes (id,nombre,correo) values (1,"Pepito","SDF@ASDF.COM");
+
+truncate TABLE clientes; <- Borrar el contenido de la tabla
+
+DROP TABLE clientes; <- Borrar toda la tabla
+
+DROP DATABASE ejemplo; <- Borrar toda la base de datos
+
+alter table nombre_tabla add column nombre_columna <- Añadir una columna a una tabla ya creada
+
+
+****Modificar datos en la tabla****
+
+UPDATE nombre_tabla
+SET columna1 = valor_a_insertar, columna2 = valor_a_insertar2
+WHERE columnaPK = valor;   <---- Siempre poner el where o reemplazará todo
+
+*******************************************************************************
+
+Where <- sirve para referenciar, con Select * from nombre_tabla where podemos especificar y filtrar busquedas
+Like <- Comodin para hacer búsquedas si ponemos "% %"
+Between <- Entre
+order by columna <- ordenar por columna
+asc <- ascendente
+desc <- descendente
+" %" <- Buscar palabras que comiencen con esa combinación
+"% " <- Buscar palabras que terminen con esa combinación
+
+
+*****Relacionar tablas*****
+alter table clientes
+add foreign key (columnadelatabla) references otra_tabla(pkdeesatabla); <- importante que la columna no sea not null
+
+**************************************************
+
+alter table NOMBRETABLA1
+add constraint NOMBRERESTRICCION
+foreign key (CAMPOCLAVEFORANEA)
+references NOMBRETABLA2 (CAMPOCLAVEPRIMARIA);
+
+**************************************************
+
+
+
+
+
+
